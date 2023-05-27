@@ -36,16 +36,13 @@ st.title('Iris Classifier')
 st.write('## Input Value')
 
 # インプットデータ（1行のデータフレーム）
-value_df = pd.DataFrame([],columns=['data','sepal length (cm)','petal length (cm)'])
-record = pd.Series(['data',sepalValue, petalValue], index=value_df.columns)
-value_df = value_df.append(record, ignore_index=True)
-value_df.set_index('data',inplace=True)
+value_df = pd.DataFrame([['data',sepalValue, petalValue]],columns=['data','sepal length (cm)','petal length (cm)'])
 
 # 入力値の値
 st.write(value_df)
 
 # 予測値のデータフレーム
-pred_probs = clf.predict_proba(value_df)
+pred_probs = clf.predict_proba(value_df.loc[:,['sepal length (cm)','petal length (cm)']])
 pred_df = pd.DataFrame(pred_probs,columns=['setosa','versicolor','virginica'],index=['probability'])
 
 st.write('## Prediction')
